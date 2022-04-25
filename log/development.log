@@ -9137,3 +9137,64 @@ Processing by MessagesController#getMessagesOfChat as */*
 Completed 200 OK in 7ms (Views: 3.0ms | ActiveRecord: 1.2ms | Allocations: 1465)
 
 
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE DATABASE `Instabug_Backend_Challenge_development` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE DATABASE `Instabug_Backend_Challenge_development` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35m (553.4ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  [1m[35m (959.1ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT GET_LOCK('3188769534262984350', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (96.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateApplications (20220419020139)
+  [1m[35m (824.1ms)[0m  [1m[35mCREATE TABLE `applications` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `token` varchar(255), `name` varchar(255), `chats_count` int, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20220419020139')[0m
+  [1m[36mTRANSACTION (88.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateChats (20220419020318)
+  [1m[35m (670.9ms)[0m  [1m[35mCREATE TABLE `chats` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `application_id` bigint NOT NULL, `messages_count` int, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_chats_on_application_id` (`application_id`), CONSTRAINT `fk_rails_3b5054ba3a`
+FOREIGN KEY (`application_id`)
+  REFERENCES `applications` (`id`)
+)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20220419020318')[0m
+  [1m[36mTRANSACTION (107.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateMessages (20220419020345)
+  [1m[35m (580.2ms)[0m  [1m[35mCREATE TABLE `messages` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `chat_id` bigint NOT NULL, `message_body` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_messages_on_chat_id` (`chat_id`), CONSTRAINT `fk_rails_0f670de7ba`
+FOREIGN KEY (`chat_id`)
+  REFERENCES `chats` (`id`)
+)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20220419020345')[0m
+  [1m[36mTRANSACTION (74.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to SetCountsDefaultValue (20220419033725)
+  [1m[35m (122.3ms)[0m  [1m[35mALTER TABLE `applications` CHANGE `chats_count` `chats_count` int DEFAULT 0[0m
+  [1m[35m (164.7ms)[0m  [1m[35mALTER TABLE `chats` CHANGE `messages_count` `messages_count` int DEFAULT 0[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20220419033725')[0m
+  [1m[36mTRANSACTION (73.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddNumberToChatsMessages (20220422195344)
+  [1m[35m (346.6ms)[0m  [1m[35mALTER TABLE `chats` ADD `number` int NOT NULL[0m
+  [1m[35m (378.9ms)[0m  [1m[35mALTER TABLE `messages` ADD `number` int NOT NULL[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20220422195344')[0m
+  [1m[36mTRANSACTION (85.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2022-04-25 20:42:41.819136', '2022-04-25 20:42:41.819136')[0m
+  [1m[36mTRANSACTION (87.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT RELEASE_LOCK('3188769534262984350')[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE DATABASE `Instabug_Backend_Challenge_development` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE DATABASE `Instabug_Backend_Challenge_development` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT GET_LOCK('3188769534262984350', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (30.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT RELEASE_LOCK('3188769534262984350')[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Started GET "/applications" for 172.21.0.1 at 2022-04-25 20:48:57 +0000
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by ApplicationsController#getAllApplications as */*
+  Parameters: {"MessageBody"=>"HELLO SECOND WORLD"}
+  [1m[36mApplication Load (0.4ms)[0m  [1m[34mSELECT `applications`.* FROM `applications`[0m
+  ↳ app/controllers/applications_controller.rb:6:in `getAllApplications'
+Completed 200 OK in 46ms (Views: 1.7ms | ActiveRecord: 0.4ms | Allocations: 6026)
+
+
