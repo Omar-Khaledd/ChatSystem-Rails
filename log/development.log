@@ -9214,3 +9214,26 @@ Processing by ApplicationsController#getAllApplications as */*
 Completed 200 OK in 25ms (Views: 2.1ms | ActiveRecord: 11.7ms | Allocations: 6069)
 
 
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE DATABASE `Instabug_Backend_Challenge_development` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE DATABASE `Instabug_Backend_Challenge_development` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT GET_LOCK('3188769534262984350', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (109.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to AddIndicesToTables (20220425213701)
+  [1m[35m (736.6ms)[0m  [1m[35mCREATE INDEX `index_applications_on_token` ON `applications` (`token`)[0m
+  [1m[35m (1541.1ms)[0m  [1m[35mCREATE INDEX `index_chats_on_number` ON `chats` (`number`)[0m
+  [1m[35m (311.9ms)[0m  [1m[35mCREATE INDEX `index_messages_on_number` ON `messages` (`number`)[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20220425213701')[0m
+  [1m[36mTRANSACTION (66.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (35.9ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT RELEASE_LOCK('3188769534262984350')[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Started GET "/applications" for 172.21.0.1 at 2022-04-25 21:53:12 +0000
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by ApplicationsController#getAllApplications as */*
+  Parameters: {"MessageBody"=>"HELLO SECOND WORLD"}
+  [1m[36mApplication Load (0.6ms)[0m  [1m[34mSELECT `applications`.* FROM `applications`[0m
+  ↳ app/controllers/applications_controller.rb:6:in `getAllApplications'
+Completed 200 OK in 14ms (Views: 2.0ms | ActiveRecord: 0.6ms | Allocations: 4945)
+
+
